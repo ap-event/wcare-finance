@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: wcarefinance
+  namespace: wcare-ns
+  labels:
+    app: wcare-application
+    subname: wcarefinance
+spec:
+  selector:
+    matchLabels:
+      app: wcare-application
+      subname: wcarefinance
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: wcare-application
+        subname: wcarefinance
+    spec:
+      containers:
+        - name: container-wcarefinance
+          image: "image-registry.openshift-image-registry.svc:5000/wcare-ns/wcarefinance:latest"
+          imagePullPolicy: Always
+          ports:
+            - name: my-http
+              containerPort: 9022
